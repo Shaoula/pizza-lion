@@ -121,20 +121,20 @@ const screensData = computed(() => {
           image: '/burgers/dino-burger.png',
           name: 'Dino Burger',
           ingredients: ['110gr Dana Eti', 'Marul', 'Domates', 'Salatalık Turşusu', 'Burger Sos'],
-          // price: 
+          price: 0
         },
         {
           image: '/burgers/syxiot-burger.png',
           // Suggest a creative name for two patties burger
           name: 'Syxiot Burger',
           ingredients: ['2 x 110gr Dana Eti', 'Cheddar Peyniri', 'Marul', 'Domates', 'Salatalık Turşusu', 'Burger Sos'],
-          // price: 10
+          price: 0
         },
         {
           image: '/burgers/shaoula-burger.png',
           name: 'Shaoula Burger',
           ingredients: ['3 x 110gr Dana Eti', 'Cheddar Peyniri', 'Marul', 'Domates', 'Salatalık Turşusu', 'Burger Sos'],
-          // price: 8
+          price: 0
         }
       ]
     }
@@ -143,8 +143,8 @@ const screensData = computed(() => {
 </script>
 
 <template>
-  <div class="grid overflow-x-auto" :style="`grid-template-columns: repeat(${screensData.length}, 1fr)`">
-    <div v-for="(screen, id) in screensData" :key="id" class="bg-neutral-50 min-h-screen flex flex-col">
+  <div class="grid visible" :style="`grid-template-columns: repeat(${screensData.length}, 1fr)`">
+    <div v-for="(screen, id) in screensData" :key="id" class="bg-neutral-50 flex flex-col w-screen relative h-screen">
       <header class="flex items-center justify-between py-4 px-8 border-b border-neutral-200 bg-white">
         <div>
           <!-- Logo -->
@@ -170,7 +170,7 @@ const screensData = computed(() => {
 
         <!-- <template v-for="screen in screensData"> -->
 
-        <section class="py-8 px-12 w-screen h-full relative flex justify-center flex-wrap gap-8">
+        <section class="py-8 px-12  h-full relative flex justify-center flex-wrap gap-8">
 
           <span class="text-9xl font-bold text-red-500 text-center -rotate-90
           absolute top-1/2 left-18 transform -translate-y-1/2 -translate-x-1/2
@@ -183,12 +183,12 @@ const screensData = computed(() => {
             <div class="flex basis-[30%] flex-col relative items-center">
 
               <div class="relative w-1/2 rounded-full  shadow-lg bg-white mb-4 aspect-square">
-                <div v-if="item.price > 0" class="text-neutral-800 font-bold absolute -top-4 -left-4 rounded-full bg-neutral-9 text-white p-3 aspect-square flex items-center justify-center
+                <div v-if="item?.price && item?.price > 0" class="font-bold absolute -top-4 -left-4 rounded-full bg-neutral-9 text-white p-3 aspect-square flex items-center justify-center
                  font-bold text-xl z-10
                  ">
-                  ₺{{ item.price }}
+                  ₺{{ item?.price }}
                 </div>
-                <img v-if="item.image" :src="item.image" :alt="item.title"
+                <img v-if="item.image" :src="item.image" :alt="item.name"
                   class="w-full h-full object-cover rounded-full" />
               </div>
 
@@ -206,7 +206,7 @@ const screensData = computed(() => {
 
       </main>
 
-      <p class="text-neutral-5 font-medium fixed right-4 bottom-4">
+      <p class="text-neutral-5 font-medium absolute right-6 bottom-6">
         Powered by <span class="text-xl font-black text-black"
           style="font-family: Georgia, 'Times New Roman', Times, serif;">Shaoula</span>
       </p>
